@@ -2,14 +2,14 @@
 #include<time.h>
 #include<iostream>
 #include<string>
-
+int randNum[NUM]; //定義了randNum陣列來存放隨機數
 
 Poker::Poker()
 {
  poker[0] = 0;
  for (int i = 0; i <= 13; i++)
  {
-  poker[i] = i;          
+  poker[i] = i;          //|用建構函式對牌初始化
   poker[i + 13] = i;
   poker[i + 26] = i;
   poker[i + 39] = i;
@@ -50,15 +50,41 @@ Poker::Poker()
 }
 void Poker::shuffle()
 {
- 
+  cout << "遊戲開始，開始洗牌>>>>>" << endl;
+ srand((int)time(0));
+ for (int i = 0; i < NUM; i++)
+ {
+  randNum[i] = rand() * 51 / 32767 + 1;
+ }
+ player[0] = randNum[j++];    //產生1-52的隨機數
+ player[1] = randNum[j++];    //產生1-52的隨機數
+ landlord[0] = randNum[j++];  //產生1-52的隨機數
+ landlord[1] = randNum[j++];  //產生1-52的隨機數
+
+ playerN = 2;
+ landlordN = 2;
+
+ cout << "洗牌結束,你的牌為:" << getPlayer() << "  點數:" << getSumP() << endl;
 }
 string Poker::getPlayer()const
 {
- 
+ int i;
+ string pp = "";
+
+ for (i = 0; i < playerN; i++)
+  pp = pp + pName[player[i]] + " ";
+
+ return pp;
 }
 string Poker::getLandlord()const
 {
- 
+ int i;
+ string lp = "";
+
+ for (i = 0; i < landlordN; i++)
+  lp = lp + pName[landlord[i]] + " ";
+
+ return lp;
 }
 int Poker::getSumP()const  
 {
