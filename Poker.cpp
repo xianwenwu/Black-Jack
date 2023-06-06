@@ -1,5 +1,4 @@
 #include "poker.h"
-#include<time.h>
 #include<iostream>
 #include<string>
 int randNum[NUM]; //定義了randNum陣列來存放隨機數
