@@ -88,15 +88,43 @@ string Poker::getLandlord()const
 }
 int Poker::getSumP()const  
 {
- 
+  int sp = 0;
+
+ for (int i = 0; i < playerN; i++)
+  sp = sp + pValue[player[i]];
+
+ return sp;
 }
 int Poker::getSumL()const 
 {
- 
+ int sl = 0;
+
+ for (int i = 0; i < landlordN; i++)
+  sl = sl + pValue[landlord[i]];
+
+ return sl;
 }
-void Poker::playerAsk()
+void Poker::playerAsk()  //
 {
- 
+ if (playerN >= 5)
+ {
+  cout << "你的牌數已經5張，不能再要牌了" << endl;
+  landlordProcess();
+ }
+ else
+ {
+  player[playerN++] = randNum[j++];   //產生1-52的隨機數
+  cout << "你的牌為:" << getPlayer() << "  點數:" << getSumP() << endl;
+  if (getSumP() > 21)
+  {
+   cout << "你爆牌了,你輸了!!!!" << endl << "------------------------------------------------------------------------------------" << endl;
+   shuffle();
+  }
+  else if (getSumP() == 21)
+  {
+   landlordProcess();
+  }
+ }
 }
 void Poker::landlordAsk()
 {
